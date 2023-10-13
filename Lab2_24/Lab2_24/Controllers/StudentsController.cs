@@ -1,4 +1,4 @@
-﻿using Lab2_24.Models;
+using Lab2_24.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ namespace Lab2_24.Controllers
             new Student { Id = 1, Name = "Florin", Age = 25},
             new Student { Id = 1, Name = "Marian", Age = 20},
         };
-
+        /*
         // endpoint 
         // Get 
         [HttpGet]
@@ -42,7 +42,7 @@ namespace Lab2_24.Controllers
             students.RemoveAt(studentIndex);
             return students;
         }
-
+        */
         /// New Endpoints
         [HttpGet]
         public List<Student> getAllOrdered()
@@ -58,5 +58,6 @@ namespace Lab2_24.Controllers
             students.RemoveAt(studentName);
             return students;
         }
+        
     }
 }
