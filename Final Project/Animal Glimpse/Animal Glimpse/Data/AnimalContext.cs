@@ -6,6 +6,7 @@ namespace Animal_Glimpse.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<React> Reacts { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Comments> Commentss {  get; set; }  
@@ -20,6 +21,12 @@ namespace Animal_Glimpse.Data
                 .HasOne(user => user.Profile)
                 .WithOne(profile => profile.User)
                 .HasForeignKey<Profile>(profile => profile.UserId);
+
+            // User - Admin: One-to-One
+            modelBuilder.Entity<User>()
+                .HasOne(user => user.Admin)
+                .WithOne(admin => admin.User)
+                .HasForeignKey<Admin>(admin => admin.UserId);
 
             // User -> Post: One-to-Many
             modelBuilder.Entity<User>()

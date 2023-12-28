@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Animal_Glimpse.Migrations
 {
     [DbContext(typeof(AnimalContext))]
-    [Migration("20231227202238_AnimalGlimpse")]
+    [Migration("20231228104717_AnimalGlimpse")]
     partial class AnimalGlimpse
     {
         /// <inheritdoc />
@@ -24,6 +24,29 @@ namespace Animal_Glimpse.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
 
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
@@ -215,6 +238,17 @@ namespace Animal_Glimpse.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
+                {
+                    b.HasOne("Animal_Glimpse.Models.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("Animal_Glimpse.Models.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
                     b.HasOne("Animal_Glimpse.Models.Post", "Post")
@@ -297,6 +331,8 @@ namespace Animal_Glimpse.Migrations
 
             modelBuilder.Entity("Animal_Glimpse.Models.User", b =>
                 {
+                    b.Navigation("Admin");
+
                     b.Navigation("Commentss");
 
                     b.Navigation("Posts");

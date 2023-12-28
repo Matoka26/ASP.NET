@@ -22,6 +22,29 @@ namespace Animal_Glimpse.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
                     b.Property<Guid>("CommentId")
@@ -212,6 +235,17 @@ namespace Animal_Glimpse.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
+                {
+                    b.HasOne("Animal_Glimpse.Models.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("Animal_Glimpse.Models.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
                     b.HasOne("Animal_Glimpse.Models.Post", "Post")
@@ -294,6 +328,8 @@ namespace Animal_Glimpse.Migrations
 
             modelBuilder.Entity("Animal_Glimpse.Models.User", b =>
                 {
+                    b.Navigation("Admin");
+
                     b.Navigation("Commentss");
 
                     b.Navigation("Posts");

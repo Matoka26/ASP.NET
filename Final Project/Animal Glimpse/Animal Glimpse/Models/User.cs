@@ -15,6 +15,9 @@ namespace Animal_Glimpse.Models
         // Relations
             //Profile: One-to-One
         public Profile Profile { get; set; }
+            
+            //Profile: One-to-One
+        public Admin? Admin { get; set; }
 
             //Post: One-to-Many
         public ICollection<Post>? Posts { get; set; }
