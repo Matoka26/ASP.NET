@@ -4,9 +4,9 @@ namespace Animal_Glimpse.Models
 {
     public class Profile: BaseEntity
     {
-        public string profilePic {  get; set; }
-        public string coverPic { get; set; }
-        public string bio { get; set; }
+        public string? profilePic {  get; set; }
+        public string? coverPic { get; set; }
+        public string? bio { get; set; }
 
         // Relations
             //User: One-to-One

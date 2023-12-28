@@ -10,6 +10,6 @@ namespace Animal_Glimpse.Models
 
         //Relations
             //Post, User: Many-to-Many-to-Many (Reaction)
-        public ICollection<Reaction> Reactions { get; set; }
+        public ICollection<Reaction>? Reactions { get; set; }
     }
 }

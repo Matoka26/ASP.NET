@@ -8,13 +8,13 @@ namespace Animal_Glimpse.Models
         public string lastName {  get; set; }
         public string email {  get; set; }
         public string username {  get; set; }
-        public string password { get; set; }
+        public string password {  get; set; }
         public string phoneNumber {  get; set; }
-        DateTime birthDate { get; set; }
+        public DateTime birthDate {  get;  set;  }  
 
         // Relations
-            //Profile: One-to-One
-        public Profile Profile { get; set; }
+        //Profile: One-to-One
+        public Profile? Profile { get; set; }
             
             //Profile: One-to-One
         public Admin? Admin { get; set; }
@@ -23,10 +23,10 @@ namespace Animal_Glimpse.Models
         public ICollection<Post>? Posts { get; set; }
         
             //Post: Many-to-Many (Comment)
-        public ICollection<Comments>Commentss { get; set; }
+        public ICollection<Comments>? Commentss { get; set; }
             
             //Post, React: Many-to-Many-to-Many (Reaction)
-        public ICollection<Reaction> Reactions { get; set; }
+        public ICollection<Reaction>? Reactions { get; set; }
     
     }
 }
