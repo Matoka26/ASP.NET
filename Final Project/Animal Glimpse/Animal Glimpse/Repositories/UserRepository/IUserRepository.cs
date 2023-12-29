@@ -6,6 +6,6 @@ namespace Animal_Glimpse.Repositories.UserRepository
     public interface IUserRepository: IGenericRepository<User>
     {
         // Just testing
-        public List<User> OrderByUsername(string username);
+        List<User> OrderByUsername(string username);
     }
 }

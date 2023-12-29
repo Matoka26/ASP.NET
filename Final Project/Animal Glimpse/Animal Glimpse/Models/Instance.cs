@@ -1,9 +1,9 @@
-﻿namespace Animal_Glimpse.Models
-{
-    public class Instance
-    {
-        public DateTime aquire_date {  get; set; }
+﻿using Animal_Glimpse.Models.Base;
 
+namespace Animal_Glimpse.Models
+{
+    public class Instance: BaseEntity
+    {
         // Relation
             // User <-> Role
         public Guid UserId { get; set; }

@@ -1,12 +1,8 @@
-﻿namespace Animal_Glimpse.Models
+﻿using Animal_Glimpse.Models.Base;
+namespace Animal_Glimpse.Models
 {
-    public class Reaction
+    public class Reaction: BaseEntity
     {
-        /* Here the ID will the tuple of the 3
-         * You can't have more than a reaction on a post */
-        public DateTime CreateTime { get; set; }
-        public DateTime? LastModifiedTime { get; set; }
-       
         //Relation
         //User <-> Post <-> React
         
