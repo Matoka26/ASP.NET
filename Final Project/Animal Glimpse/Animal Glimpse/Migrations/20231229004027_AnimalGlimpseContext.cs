@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Animal_Glimpse.Migrations
 {
     /// <inheritdoc />
-    public partial class AnimalGlimpse : Migration
+    public partial class AnimalGlimpseContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,6 +28,20 @@ namespace Animal_Glimpse.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    roleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -38,6 +52,7 @@ namespace Animal_Glimpse.Migrations
                     username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -47,20 +62,25 @@ namespace Animal_Glimpse.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Admins",
+                name: "Instances",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    aquire_date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.PrimaryKey("PK_Instances", x => new { x.RoleId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_Admins_Users_UserId",
+                        name: "FK_Instances_Roles_UserId",
                         column: x => x.UserId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Instances_Users_RoleId",
+                        column: x => x.RoleId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -93,9 +113,9 @@ namespace Animal_Glimpse.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    profilePic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    coverPic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    profilePic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    coverPic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -171,12 +191,6 @@ namespace Animal_Glimpse.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admins_UserId",
-                table: "Admins",
-                column: "UserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Commentss_PostId",
                 table: "Commentss",
                 column: "PostId");
@@ -184,6 +198,11 @@ namespace Animal_Glimpse.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Commentss_UserId",
                 table: "Commentss",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Instances_UserId",
+                table: "Instances",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -212,16 +231,19 @@ namespace Animal_Glimpse.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Admins");
+                name: "Commentss");
 
             migrationBuilder.DropTable(
-                name: "Commentss");
+                name: "Instances");
 
             migrationBuilder.DropTable(
                 name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "Reactions");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Posts");

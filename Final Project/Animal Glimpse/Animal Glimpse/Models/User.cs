@@ -13,11 +13,11 @@ namespace Animal_Glimpse.Models
         public DateTime birthDate {  get;  set;  }  
 
         // Relations
-        //Profile: One-to-One
-        public Profile? Profile { get; set; }
-            
             //Profile: One-to-One
-        public Admin? Admin { get; set; }
+        public Profile? Profile { get; set; }
+
+            //Role: Many-to-Many (Instance)
+        public ICollection<Instance>? instances { get; set; }
 
             //Post: One-to-Many
         public ICollection<Post>? Posts { get; set; }

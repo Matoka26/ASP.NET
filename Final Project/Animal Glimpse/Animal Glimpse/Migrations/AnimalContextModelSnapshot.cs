@@ -22,29 +22,6 @@ namespace Animal_Glimpse.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Admins");
-                });
-
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
                     b.Property<Guid>("CommentId")
@@ -74,6 +51,24 @@ namespace Animal_Glimpse.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Commentss");
+                });
+
+            modelBuilder.Entity("Animal_Glimpse.Models.Instance", b =>
+                {
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("aquire_date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Instances");
                 });
 
             modelBuilder.Entity("Animal_Glimpse.Models.Post", b =>
@@ -120,15 +115,12 @@ namespace Animal_Glimpse.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("bio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("coverPic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("profilePic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -194,6 +186,27 @@ namespace Animal_Glimpse.Migrations
                     b.ToTable("Reactions");
                 });
 
+            modelBuilder.Entity("Animal_Glimpse.Models.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("roleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("Animal_Glimpse.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -204,6 +217,9 @@ namespace Animal_Glimpse.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("birthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("email")
@@ -235,17 +251,6 @@ namespace Animal_Glimpse.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Animal_Glimpse.Models.Admin", b =>
-                {
-                    b.HasOne("Animal_Glimpse.Models.User", "User")
-                        .WithOne("Admin")
-                        .HasForeignKey("Animal_Glimpse.Models.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Animal_Glimpse.Models.Comments", b =>
                 {
                     b.HasOne("Animal_Glimpse.Models.Post", "Post")
@@ -261,6 +266,25 @@ namespace Animal_Glimpse.Migrations
                         .IsRequired();
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Animal_Glimpse.Models.Instance", b =>
+                {
+                    b.HasOne("Animal_Glimpse.Models.User", "User")
+                        .WithMany("instances")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Animal_Glimpse.Models.Role", "Role")
+                        .WithMany("instances")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
@@ -326,18 +350,22 @@ namespace Animal_Glimpse.Migrations
                     b.Navigation("Reactions");
                 });
 
+            modelBuilder.Entity("Animal_Glimpse.Models.Role", b =>
+                {
+                    b.Navigation("instances");
+                });
+
             modelBuilder.Entity("Animal_Glimpse.Models.User", b =>
                 {
-                    b.Navigation("Admin");
-
                     b.Navigation("Commentss");
 
                     b.Navigation("Posts");
 
-                    b.Navigation("Profile")
-                        .IsRequired();
+                    b.Navigation("Profile");
 
                     b.Navigation("Reactions");
+
+                    b.Navigation("instances");
                 });
 #pragma warning restore 612, 618
         }

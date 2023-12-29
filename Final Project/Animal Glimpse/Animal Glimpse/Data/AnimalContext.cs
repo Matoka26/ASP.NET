@@ -6,8 +6,10 @@ namespace Animal_Glimpse.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<React> Reacts { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Instance> Instances { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Comments> Commentss {  get; set; }  
         public DbSet<Reaction> Reactions { get; set; }
@@ -21,12 +23,6 @@ namespace Animal_Glimpse.Data
                 .HasOne(user => user.Profile)
                 .WithOne(profile => profile.User)
                 .HasForeignKey<Profile>(profile => profile.UserId);
-
-            // User - Admin: One-to-One
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Admin)
-                .WithOne(admin => admin.User)
-                .HasForeignKey<Admin>(admin => admin.UserId);
 
             // User -> Post: One-to-Many
             modelBuilder.Entity<User>()
@@ -48,6 +44,20 @@ namespace Animal_Glimpse.Data
                 .WithMany(post => post.Commentss)
                 .HasForeignKey(comment => comment.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // User <-> Role: Many-to-Many (Instance)
+            modelBuilder.Entity<Instance>()
+                .HasKey(instance => new { instance.RoleId, instance.UserId });
+
+            modelBuilder.Entity<Instance>()
+                .HasOne(instance => instance.Role)
+                .WithMany(user => user.instances)
+                .HasForeignKey(instance => instance.UserId);
+
+            modelBuilder.Entity<Instance>()
+                .HasOne(instance => instance.User)
+                .WithMany(role => role.instances)
+                .HasForeignKey(instance => instance.RoleId);
 
             // User <-> Post <-> React: Many-to-Many-to-Many (Reaction)
             modelBuilder.Entity<Reaction>()
