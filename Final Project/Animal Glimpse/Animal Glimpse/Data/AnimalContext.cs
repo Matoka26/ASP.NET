@@ -31,7 +31,7 @@ namespace Animal_Glimpse.Data
 
             // User <-> Post: Many-to-Many (Comment)
             modelBuilder.Entity<Comments>()
-                .HasKey(comment => comment.CommentId);
+                .HasKey(comment => comment.Id);
 
             modelBuilder.Entity<Comments>()
                 .HasOne(comment => comment.User)

@@ -9,7 +9,7 @@ namespace Animal_Glimpse.Repositories.UserRepository
         public UserRepository(AnimalContext context) : base(context) { }
 
         // Just testing
-        public List<User> OrderByUsername(string username)
+        public List<User> OrderByUsername()
         {
             var userOrdered = from s in _table
                               orderby s.username
