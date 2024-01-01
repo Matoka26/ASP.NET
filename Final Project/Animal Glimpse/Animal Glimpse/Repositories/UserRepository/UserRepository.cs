@@ -12,7 +12,7 @@ namespace Animal_Glimpse.Repositories.UserRepository
         public List<User> OrderByUsername()
         {
             var userOrdered = from s in _table
-                              orderby s.username
+                              orderby s.Username
                               select s;
             
             return userOrdered.ToList();

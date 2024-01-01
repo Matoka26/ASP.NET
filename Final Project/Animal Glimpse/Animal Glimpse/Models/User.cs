@@ -4,20 +4,20 @@ namespace Animal_Glimpse.Models
 {
     public class User: BaseEntity
     {
-        public string firstName {  get; set; }
-        public string lastName {  get; set; }
-        public string email {  get; set; }
-        public string username {  get; set; }
-        public string password {  get; set; }
-        public string phoneNumber {  get; set; }
-        public DateTime birthDate {  get;  set;  }  
+        public string FirstName {  get; set; }
+        public string LastName {  get; set; }
+        public string Email {  get; set; }
+        public string Username {  get; set; }
+        public string Password {  get; set; }
+        public string PhoneNumber {  get; set; }
+        public DateTime BirthDate {  get;  set;  }  
 
         // Relations
             //Profile: One-to-One
         public Profile? Profile { get; set; }
 
             //Role: Many-to-Many (Instance)
-        public ICollection<Instance>? instances { get; set; }
+        public ICollection<Instance>? Instances { get; set; }
 
             //Post: One-to-Many
         public ICollection<Post>? Posts { get; set; }

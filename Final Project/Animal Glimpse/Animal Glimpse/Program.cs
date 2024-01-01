@@ -9,12 +9,18 @@ void SeedData(IHost app)
 
     using (var scope = scopedFactory.CreateScope())
     {
-        var service = scope.ServiceProvider.GetService<ReactSeeder>();
-        service.SeedInitialReact();
-;
+        var reactService = scope.ServiceProvider.GetService<ReactSeeder>();
+        reactService.SeedInitialReact();
+
+        var roleService = scope.ServiceProvider.GetService<RoleSeeder>();
+        roleService.SeedInitialRole();
+     
+        var userService = scope.ServiceProvider.GetService<UserSeeder>();
+        userService.SeedInitialUser();
+
+        var instanceService = scope.ServiceProvider.GetService<InstanceSeeder>();
+        instanceService.SeedInitialInstance();
     }
-
-
 }
 
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Animal_Glimpse.Migrations
 {
     /// <inheritdoc />
-    public partial class AnimalGlimpseContext : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Animal_Glimpse.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<int>(type: "int", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -46,13 +46,13 @@ namespace Animal_Glimpse.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -67,7 +67,9 @@ namespace Animal_Glimpse.Migrations
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    aquire_date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -113,9 +115,9 @@ namespace Animal_Glimpse.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    profilePic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    coverPic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverPic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -135,16 +137,16 @@ namespace Animal_Glimpse.Migrations
                 name: "Commentss",
                 columns: table => new
                 {
-                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Commentss", x => x.CommentId);
+                    table.PrimaryKey("PK_Commentss", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Commentss_Posts_PostId",
                         column: x => x.PostId,
@@ -165,7 +167,8 @@ namespace Animal_Glimpse.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

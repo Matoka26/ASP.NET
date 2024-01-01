@@ -112,23 +112,25 @@ namespace Animal_Glimpse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverPic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastModifiedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ProfilePic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("bio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("coverPic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("profilePic")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -223,36 +225,36 @@ namespace Animal_Glimpse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("birthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("email")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("lastName")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("phoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -283,7 +285,7 @@ namespace Animal_Glimpse.Migrations
             modelBuilder.Entity("Animal_Glimpse.Models.Instance", b =>
                 {
                     b.HasOne("Animal_Glimpse.Models.User", "User")
-                        .WithMany("instances")
+                        .WithMany("Instances")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -369,13 +371,13 @@ namespace Animal_Glimpse.Migrations
                 {
                     b.Navigation("Commentss");
 
+                    b.Navigation("Instances");
+
                     b.Navigation("Posts");
 
                     b.Navigation("Profile");
 
                     b.Navigation("Reactions");
-
-                    b.Navigation("instances");
                 });
 #pragma warning restore 612, 618
         }

@@ -56,7 +56,7 @@ namespace Animal_Glimpse.Data
 
             modelBuilder.Entity<Instance>()
                 .HasOne(instance => instance.User)
-                .WithMany(role => role.instances)
+                .WithMany(role => role.Instances)
                 .HasForeignKey(instance => instance.RoleId);
 
             // User <-> Post <-> React: Many-to-Many-to-Many (Reaction)

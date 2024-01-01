@@ -64,6 +64,9 @@ namespace Animal_Glimpse.Helpers.Extensions
         public static IServiceCollection AddSeeders (this IServiceCollection services)
         {
             services.AddTransient<ReactSeeder>();
+            services.AddTransient<RoleSeeder>();
+            services.AddTransient<UserSeeder>();
+            services.AddTransient<InstanceSeeder>();
 
             return services;
         }
