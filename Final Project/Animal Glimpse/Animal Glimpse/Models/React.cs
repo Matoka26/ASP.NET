@@ -5,7 +5,7 @@ namespace Animal_Glimpse.Models
     public class React: BaseEntity
     {
         public string Name { get; set; }
-        public string Color { get; set; }
+        public int Color { get; set; }
         public string Logo { get; set; }
 
         //Relations

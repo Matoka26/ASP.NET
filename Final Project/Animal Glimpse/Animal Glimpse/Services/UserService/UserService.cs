@@ -18,8 +18,8 @@ namespace Animal_Glimpse.Services.UserService
         public List<UserDTO> GetUsersSorted()
         {
             var users = _mapper.Map<List<UserDTO>>(_userRepository.OrderByUsername());
-            Console.WriteLine(users.Count());
-            return null;
+            
+            return users;
         }
     }
 }
