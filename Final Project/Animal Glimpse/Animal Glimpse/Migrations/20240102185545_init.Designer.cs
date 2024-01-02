@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Animal_Glimpse.Migrations
 {
     [DbContext(typeof(AnimalContext))]
-    [Migration("20240101213721_init")]
+    [Migration("20240102185545_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -90,17 +90,18 @@ namespace Animal_Glimpse.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("LastModifiedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Picture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("picture")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

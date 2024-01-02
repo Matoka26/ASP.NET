@@ -1,4 +1,6 @@
 ﻿using Animal_Glimpse.Models.Base;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Animal_Glimpse.Models
 {

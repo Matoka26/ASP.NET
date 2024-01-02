@@ -9,6 +9,6 @@
         //public string password { get; set; }
         //public string phoneNumber { get; set; }
         //public DateTime birthDate {  get; set; }
-        public Profile Profile { get; set; }
+        //public Profile Profile { get; set; }
     }
 }

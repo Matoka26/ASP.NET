@@ -4,8 +4,8 @@ namespace Animal_Glimpse.Models
 {
     public class Post: BaseEntity
     {
-        public string? description {  get; set; }
-        public string? picture {  get; set; }
+        public string? Description {  get; set; }
+        public string Picture {  get; set; }
 
         // Relations
             // User: One-to-Many

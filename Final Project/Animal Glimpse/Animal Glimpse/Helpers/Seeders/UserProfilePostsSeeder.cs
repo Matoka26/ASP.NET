@@ -25,12 +25,25 @@ namespace Animal_Glimpse.Helpers.Seeders
                     PhoneNumber = "0733987486",
                     Password = "MihaiESmeker69",
                     BirthDate = new DateTime(2003, 07, 13),
-                    
+
                     Profile = new Profile
                     {
                         Bio = "N ai tu treaba",
                         ProfilePic = "Images/Profile/Users/skpha13P.jpeg",
                         CoverPic = "Images/Profile/Users/skpha13C.jpeg"
+                    },
+                    Posts = new List<Post>
+                    {
+                        new Post 
+                        {
+                            Description = "check this out",
+                            Picture = "Images/Posts/Pipe Dog.jpeg"
+                        },
+                        new Post
+                        {
+                            Description = "they be addicted",
+                            Picture = "Images/Posts/Pipe Dog2.jpeg"
+                        }
                     }
                 };
 
@@ -49,6 +62,20 @@ namespace Animal_Glimpse.Helpers.Seeders
                         Bio = "buna mami",
                         ProfilePic = "Images/Profile/Users/Matoka26P.jpeg",
                         CoverPic = "Images/Profile/Users/Matoka26C.jpeg"
+                    },
+
+                    Posts = new List<Post>
+                    {
+                        new Post
+                        {
+                            Description = "AI knows it sht",
+                            Picture = "Images/Posts/Many Bees.jpeg"
+                        },
+                        new Post
+                        {
+                            Description = "big chonck",
+                            Picture = "Images/Posts/Big Bee.jpeg"
+                        }
                     }
                 };
 
@@ -67,6 +94,15 @@ namespace Animal_Glimpse.Helpers.Seeders
                         Bio = "TOP G,Imi place kartingu i guess",
                         CoverPic = "Images/Profile/Default/Default Cover Pic.jpeg",
                         ProfilePic = "Images/Profile/Default/Default Profile Pic.jpeg"
+                    },
+
+                    Posts = new List<Post>
+                    {
+                        new Post
+                        {
+                            Description = "Champ!!",
+                            Picture = "Images/Posts/Cat Kart.jpeg"
+                        }
                     }
                 };
 
@@ -79,3 +115,5 @@ namespace Animal_Glimpse.Helpers.Seeders
         }
     }
 }
+
+//When you make a user you give user role by default?

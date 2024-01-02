@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Animal_Glimpse.Models.Base
 {
@@ -9,7 +10,14 @@ namespace Animal_Glimpse.Models.Base
         // Generate a new value when you add a new row
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public DateTime CreatedTime { get; set; }
+
+        public DateTime CreatedTime {  get; set; }
         public DateTime? LastModifiedTime { get; set; }
+    
+        public BaseEntity()
+        {
+            CreatedTime = DateTime.Now;
+        }
     }
+
 }
