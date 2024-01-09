@@ -1,6 +1,8 @@
 using Animal_Glimpse.Data;
 using Animal_Glimpse.Helpers.Extensions;
 using Animal_Glimpse.Helpers.Seeders;
+using Animal_Glimpse.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 void SeedData(IHost app)
@@ -12,14 +14,15 @@ void SeedData(IHost app)
         var reactService = scope.ServiceProvider.GetService<ReactSeeder>();
         reactService.SeedInitialReact();
 
-        var roleService = scope.ServiceProvider.GetService<RoleSeeder>();
-        roleService.SeedInitialRole();
      
         var userService = scope.ServiceProvider.GetService<UserSeeder>();
         userService.SeedInitialUser();
 
-        var instanceService = scope.ServiceProvider.GetService<InstanceSeeder>();
-        instanceService.SeedInitialInstance();
+        var roleService = scope.ServiceProvider.GetService<RolesSeeder>();
+        roleService.SeedInitialRoles();
+
+        var userRolesService = scope.ServiceProvider.GetService<UserRoleSeeder>();
+        userRolesService.SeedInitialUserRoles();
     }
 }
 
@@ -33,6 +36,21 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AnimalContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+    .AddRoles<IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AnimalContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequireDigit = false;
+    opt.Password.RequiredLength = 8;
+    opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedAccount = false;
+    opt.SignIn.RequireConfirmedEmail = false;
+    opt.SignIn.RequireConfirmedPhoneNumber = false;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

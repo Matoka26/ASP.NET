@@ -1,5 +1,6 @@
 ﻿using Animal_Glimpse.Data;
 using Animal_Glimpse.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Animal_Glimpse.Helpers.Seeders
 {
@@ -16,15 +17,22 @@ namespace Animal_Glimpse.Helpers.Seeders
         {
             if(!_context.Users.Any())
             {
+                var hasher = new PasswordHasher<User>();
                 var user1 = new User
                 {
+                    Id = new Guid("a777c9f3-6811-4bb6-bb20-352bdd9f00a1"),
+                    UserName = "skpha13",
+                    NormalizedUserName = "skpha13".ToUpper(),
+                    Email = "skpha13@gmail.com",
+                    NormalizedEmail = "skpha13@gmail.com".ToUpper(),
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null,"MihaiESmeker69"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
+
+                    BirthDate = new DateTime(2003, 07, 13),
                     FirstName = "Mincu",
                     LastName = "Adrian",
-                    Email = "skpha13@gmail.com",
-                    Username = "Skpha13",
                     PhoneNumber = "0733987486",
-                    Password = "MihaiESmeker69",
-                    BirthDate = new DateTime(2003, 07, 13),
 
                     Profile = new Profile
                     {
@@ -49,12 +57,18 @@ namespace Animal_Glimpse.Helpers.Seeders
 
                 var user2 = new User
                 {
+                    Id = new Guid("aeb1d17a-f966-4089-a5b8-f28ce98d4e28"),
+                    UserName = "Matoka26",
+                    NormalizedUserName = "Matoka26".ToUpper(),
+                    Email = "mihail_danut24@yahoo.com",
+                    NormalizedEmail = "mihail_danut24@yahoo.com".ToUpper(),
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "LaTineSiLaBani"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
+
                     FirstName = "Dogaru",
                     LastName = "Mihail",
-                    Email = "mihail_danut24@yahoo.com",
-                    Username = "Matoka26",
                     PhoneNumber = "0739548109",
-                    Password = "LaTineSiLaBani",
                     BirthDate = new DateTime(2003, 09, 24),
 
                     Profile = new Profile
@@ -81,12 +95,18 @@ namespace Animal_Glimpse.Helpers.Seeders
 
                 var user3 = new User
                 {
+                    Id = new Guid("3cc80f65-2fc3-407d-b9d5-7be0b1439a08"),
+                    UserName = "Qarty26",
+                    NormalizedUserName = "Qarty26".ToUpper(),
+                    Email = "razvanm99@gmail.com",
+                    NormalizedEmail = "razvanm99@gmail.com".ToUpper(),
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "CeiAlaCox420"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
+
+                    PhoneNumber = "0727820349",
                     FirstName = "Mircea",
                     LastName = "Razvan",
-                    Email = "razvanm99@gmail.com",
-                    Username = "Qarty26",
-                    PhoneNumber = "0727820349",
-                    Password = "CeiAlaCox420",
                     BirthDate = new DateTime(2003, 04, 26),
 
                     Profile = new Profile

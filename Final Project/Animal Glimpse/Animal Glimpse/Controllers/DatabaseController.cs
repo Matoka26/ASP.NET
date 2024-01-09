@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Animal_Glimpse.Data;
-using Animal_Glimpse.Models.DTOs;
 using Animal_Glimpse.Models;
 
 namespace Animal_Glimpse.Controllers
@@ -13,6 +12,7 @@ namespace Animal_Glimpse.Controllers
     {
         private readonly AnimalContext _animalcontext;
 
+        /// GETS
         public DatabaseController(AnimalContext animalContext)
         {
             _animalcontext = animalContext;
@@ -35,11 +35,22 @@ namespace Animal_Glimpse.Controllers
         {
             return Ok(await _animalcontext.Posts.ToListAsync());
         }
-        [HttpGet("Roles")]
-        public async Task<IActionResult> GetRoles()
+
+        [HttpGet("Comments")]
+        public async Task<IActionResult> GetComments()
         {
-            return Ok(await _animalcontext.Roles.ToListAsync());
+            return Ok(await _animalcontext.Commentss.ToListAsync());
         }
+
+        [HttpGet("Reaction")]
+        public async Task<IActionResult> GetReactions()
+        {
+            return Ok(await _animalcontext.Reactions.ToListAsync());
+        }
+
+        /// CREATE
+
+
 
     }
 }
