@@ -29,6 +29,18 @@ namespace Animal_Glimpse.Helpers.Seeders
                         Name = "User",
                         NormalizedName = "User".ToUpper()
                     },
+                    new IdentityRole<Guid>()
+                    {
+                        Id = new Guid("3f806af4-541e-44d3-b6f7-1c596f3db3cc"),
+                        Name = "Sponsor",
+                        NormalizedName = "Sponsor".ToUpper()
+                    },
+                    new IdentityRole<Guid>()
+                    {
+                        Id = new Guid("dfc9ac4f-b7e8-4144-95ba-0952eede041e"),
+                        Name = "Business",
+                        NormalizedName = "Business".ToUpper()
+                    },
                 };
 
                 _context.Roles.AddRange(role1);

@@ -42,15 +42,26 @@ namespace Animal_Glimpse.Controllers
             return Ok(await _animalcontext.Commentss.ToListAsync());
         }
 
-        [HttpGet("Reaction")]
+        [HttpGet("Reactions")]
         public async Task<IActionResult> GetReactions()
         {
             return Ok(await _animalcontext.Reactions.ToListAsync());
         }
 
+        [HttpGet("Roles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            return Ok(await _animalcontext.Roles.ToListAsync());
+        }
+
+        [HttpGet("Profile")]
+        public async Task<IActionResult> GetProfiles()
+        {
+            return Ok(await _animalcontext.Profiles.ToListAsync());
+        }
         /// CREATE
 
-
+        
 
     }
 }

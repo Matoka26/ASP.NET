@@ -23,6 +23,9 @@ void SeedData(IHost app)
 
         var userRolesService = scope.ServiceProvider.GetService<UserRoleSeeder>();
         userRolesService.SeedInitialUserRoles();
+
+        var commService = scope.ServiceProvider.GetService<CommentsSeeder>();
+        commService.SeedInitialComments();
     }
 }
 

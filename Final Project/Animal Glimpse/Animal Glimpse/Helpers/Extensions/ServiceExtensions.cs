@@ -14,6 +14,7 @@ using Animal_Glimpse.Services.ReactionService;
 using Animal_Glimpse.Services.CommentsService;
 using Animal_Glimpse.Helpers.Seeders;
 using Animal_Glimpse.Controllers;
+using Animal_Glimpse.Repositories.UserRepository;
 
 namespace Animal_Glimpse.Helpers.Extensions
 {
@@ -24,12 +25,14 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<IProfileRepository, ProfileRepository>();
             services.AddTransient<IReactRepository, ReactRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             //This one might need CRUD
             services.AddTransient<IReactionRepository, ReactionRepository>();
 
             //Associatives that idk what will happen for sure
             services.AddTransient<ICommentsRepository, CommentsRepository>();
+            
 
             return services;
         }
@@ -39,6 +42,7 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<IReactService, ReactService>();
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IUserService, UserService>();
 
             //This one might need CRUD
             services.AddTransient<IReactionService, ReactionService>();
@@ -54,6 +58,7 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<ReactSeeder>();
             services.AddTransient<UserSeeder>();
             services.AddTransient<RolesSeeder>();
+            services.AddTransient<CommentsSeeder>();
             services.AddTransient<UserRoleSeeder>();
 
             return services;
