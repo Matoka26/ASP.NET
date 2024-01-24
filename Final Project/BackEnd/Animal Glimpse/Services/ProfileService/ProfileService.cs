@@ -72,7 +72,8 @@ namespace Animal_Glimpse.Services.ProfileService
                 throw new Exception("User not found");
             }
 
-            if(profile.ProfilePic != null) { existingProfile.ProfilePic = profile.ProfilePic; }
+            profile.LastModified = DateTime.Now; 
+            if (profile.ProfilePic != null) { existingProfile.ProfilePic = profile.ProfilePic; }
             if(profile.CoverPic != null) { existingProfile.CoverPic = profile.CoverPic; }
             if(profile.Bio != null) { existingProfile.Bio = profile.Bio; }
 

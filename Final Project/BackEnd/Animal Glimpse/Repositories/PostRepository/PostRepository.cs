@@ -19,5 +19,13 @@ namespace Animal_Glimpse.Repositories.PostRepository
 
             return await query.ToListAsync(); 
         }
+        public async Task<List<Post>> GetFeed()
+        {
+            var query = _table
+                        .OrderByDescending(s => s.CreatedTime)
+                        .Take(10);
+
+            return await query.ToListAsync();
+        }
     }
 }

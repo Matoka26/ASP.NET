@@ -16,6 +16,8 @@ namespace Animal_Glimpse.Helpers
             var hasher = new PasswordHasher<User>();
 
             // USER
+            CreateMap<User, UserActionDTO>();
+
             CreateMap<User, UserCreateDTO>();
             CreateMap<User, UserUpdateDTO>();
 
@@ -45,8 +47,12 @@ namespace Animal_Glimpse.Helpers
             CreateMap<Profile, ProfileCreateDTO>();
             CreateMap<ProfileCreateDTO, Profile>();
             
-            CreateMap<PostDTO, Post>();
-            CreateMap<Post, PostDTO>();
+            // POST
+            CreateMap<PostCreateDTO, Post>();
+            CreateMap<Post, PostCreateDTO>();
+
+            CreateMap<PostShownDTO, Post>();
+            CreateMap<Post, PostShownDTO>();
         }
     }
 }

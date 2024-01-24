@@ -1,4 +1,8 @@
-﻿using Animal_Glimpse.Services.PostService;
+﻿using Animal_Glimpse.Models.DTOs.PostDTO;
+using Animal_Glimpse.Models.DTOs.UserDTOs;
+using Animal_Glimpse.Services.PostService;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Animal_Glimpse.Controllers
@@ -12,6 +16,19 @@ namespace Animal_Glimpse.Controllers
             _postService = postService;
         }
 
+        [HttpGet("PostFeed")]
+        public async Task<IActionResult> GetFeed()
+        {
+            try
+            {
+                return Ok(await _postService.GetFeed());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("GetPostsByUsername")]
         public async Task<IActionResult> GetPostsByUsername(string username)
         {
@@ -23,6 +40,49 @@ namespace Animal_Glimpse.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        } 
+        }
+
+        [HttpPost("NewPost")]
+        public async Task<IActionResult> CreatePost(PostCreateDTO post)
+        {
+            try
+            {
+                _postService.CreatePost(post);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("DeletePost")]
+        public IActionResult DeletePost(Guid postId)
+        {
+            try
+            {
+                _postService.Delete(postId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        
+        [HttpPatch("EditPost")]
+        public IActionResult EditPost([FromBody]PostUpdateDTO post)
+        {
+            try
+            {
+                _postService.UpdatePost(post);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

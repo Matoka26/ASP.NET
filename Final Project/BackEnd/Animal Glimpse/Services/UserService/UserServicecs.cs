@@ -60,6 +60,7 @@ namespace Animal_Glimpse.Services.CommentsService
                 existingUser.PasswordHash = hasher.HashPassword(null, user.Password);
             }
             _userRepository.Update(_mapper.Map<User>(existingUser));
+            
         }
 
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)
