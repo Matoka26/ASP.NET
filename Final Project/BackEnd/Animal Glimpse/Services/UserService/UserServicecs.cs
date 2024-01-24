@@ -33,13 +33,17 @@ namespace Animal_Glimpse.Services.CommentsService
             return _mapper.Map<UserDTO>(await _userRepository.GetUserById(id));
 
         }
+        public async Task<UserDTO> GetUserByUsername(string username)
+        {
+            return _mapper.Map<UserDTO>(await _userRepository.GetByUsername(username));
+        }
 
         public async Task Delete(Guid id)
         {
             await _userRepository.Delete(id);
         }
 
-        public async Task<UserDTO> Update(UserUpdateDTO user)
+        public async Task Update(UserUpdateDTO user)
         {
             var existingUser = await _userRepository.GetUserById(user.Id);
             if (existingUser == null)
@@ -55,8 +59,7 @@ namespace Animal_Glimpse.Services.CommentsService
                 var hasher = new PasswordHasher<User>();
                 existingUser.PasswordHash = hasher.HashPassword(null, user.Password);
             }
-            await _userRepository.Update(existingUser);
-            return _mapper.Map<UserDTO>(existingUser);
+            _userRepository.Update(_mapper.Map<User>(existingUser));
         }
 
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)

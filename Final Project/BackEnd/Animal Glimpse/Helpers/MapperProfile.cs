@@ -1,8 +1,10 @@
 ﻿using Animal_Glimpse.Models;
 using Animal_Glimpse.Models.DTOs;
+using Animal_Glimpse.Models.DTOs.ProfileDTO;
 using Animal_Glimpse.Models.DTOs.UserDTOs;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Profile = Animal_Glimpse.Models.Profile;
 
 namespace Animal_Glimpse.Helpers
 {
@@ -12,6 +14,7 @@ namespace Animal_Glimpse.Helpers
         {
             var hasher = new PasswordHasher<User>();
 
+            // USER
             CreateMap<User, UserCreateDTO>();
             CreateMap<User, UserUpdateDTO>();
 
@@ -30,6 +33,16 @@ namespace Animal_Glimpse.Helpers
                     opt.MapFrom(src => false))
                 .ForMember(u => u.SecurityStamp, opt =>
                     opt.Ignore());
+
+            // PROFILE
+            CreateMap<Profile, ProfileDTO>();
+            CreateMap<ProfileDTO, Profile>();
+
+            CreateMap<Profile, ProfileUpdateDTO>();
+            CreateMap<ProfileUpdateDTO, Profile>();
+
+            CreateMap<Profile, ProfileCreateDTO>();
+            CreateMap<ProfileCreateDTO, Profile>();   
         }
     }
 }

@@ -5,5 +5,6 @@ namespace Animal_Glimpse.Repositories.ProfileRepository
 {
     public interface IProfileRepository: IGenericRepository<Profile>
     {
+        Profile? GetProfileByUserId(Guid userId);
     }
 }

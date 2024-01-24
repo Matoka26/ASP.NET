@@ -26,7 +26,7 @@ namespace Animal_Glimpse.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("getUser")]
+        [HttpGet("GetUserById")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             try {
@@ -42,8 +42,25 @@ namespace Animal_Glimpse.Controllers
             }
         }
 
+        [HttpGet("GetUserByUsername")]
+        public async Task<IActionResult> GetUserByUsername(string username)
+        {
+            try
+            {
+                return Ok(await _userService.GetUserByUsername(username));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorResponse()
+                {
+                    StatusCode = 500,
+                    Message = ex.Message
+                });
+            }
+        }
+
         [AllowAnonymous]
-        [HttpPost("signUp")]
+        [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] SignUpDTO signUpDTO)
         {
             try
@@ -85,14 +102,36 @@ namespace Animal_Glimpse.Controllers
                 });
             }
         }
+        [Authorize]
+        [HttpPost("LogOut")]
+        public async Task<IActionResult> Logout()
+        {
+            try
+            {
+                await _userService.Logout();
+                return Ok(new ErrorResponse()
+                {
+                    StatusCode = 200,
+                    Message = "Logout Successful"
+                });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new ErrorResponse()
+                {
+                    StatusCode = 500,
+                    Message = ex.Message
+                });
+            }
+        }
 
-
-        [HttpPatch("updateUser")]
+        [HttpPatch("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDTO user)
         {
             try
             {
-                return Ok(await _userService.Update(user));
+                await _userService.Update(user);
+                return Ok();
             }
             catch (Exception exception)
             {
@@ -104,7 +143,7 @@ namespace Animal_Glimpse.Controllers
             }
         }
 
-        [HttpDelete("deleteUser")]
+        [HttpDelete("DeleteUser")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             try
@@ -125,6 +164,7 @@ namespace Animal_Glimpse.Controllers
                 });
             }
         }
+
     }
 
 }
