@@ -14,5 +14,6 @@ namespace Animal_Glimpse.Repositories.ProfileRepository
         {
             return  _table.FirstOrDefault(profile => profile.UserId == userId);
         }
+
     }
 }

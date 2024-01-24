@@ -19,7 +19,7 @@ namespace Animal_Glimpse.Repositories.UserRepository
         }
         public async Task<User>? GetByUsername(string username)
         {
-            return await _userManager.FindByNameAsync(username.ToString());
+            return await _userManager.FindByNameAsync(username);
         }
 
         public async Task CreateAsync(User user)

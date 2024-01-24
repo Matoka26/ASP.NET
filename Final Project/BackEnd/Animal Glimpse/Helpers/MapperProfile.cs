@@ -1,5 +1,6 @@
 ﻿using Animal_Glimpse.Models;
 using Animal_Glimpse.Models.DTOs;
+using Animal_Glimpse.Models.DTOs.PostDTO;
 using Animal_Glimpse.Models.DTOs.ProfileDTO;
 using Animal_Glimpse.Models.DTOs.UserDTOs;
 using AutoMapper;
@@ -42,7 +43,10 @@ namespace Animal_Glimpse.Helpers
             CreateMap<ProfileUpdateDTO, Profile>();
 
             CreateMap<Profile, ProfileCreateDTO>();
-            CreateMap<ProfileCreateDTO, Profile>();   
+            CreateMap<ProfileCreateDTO, Profile>();
+            
+            CreateMap<PostDTO, Post>();
+            CreateMap<Post, PostDTO>();
         }
     }
 }

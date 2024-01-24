@@ -27,16 +27,19 @@ namespace Animal_Glimpse.Services.ProfileService
         public async Task CreateProfile(ProfileCreateDTO profile)
         {
             var user = await _userRepository.GetUserById(profile.UserId);  
-            if(user.Profile ==  null)
+            if(user.Profile !=  null)
             {
                 throw new Exception("User already has a profile");
             }
 
             var newProfile = _mapper.Map <Animal_Glimpse.Models.Profile>(profile);
             newProfile.Id = Guid.NewGuid();
-
+            newProfile.UserId = user.Id;
+            newProfile.User = user;
             user.Profile = newProfile;
 
+            _userRepository.Update(user);
+            
             _profileRepository.Create(newProfile);
             await _profileRepository.SaveAsync();
         }
