@@ -22,6 +22,102 @@ namespace backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("backend.Models.Autor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EdituraId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EdituraId");
+
+                    b.ToTable("Autor");
+                });
+
+            modelBuilder.Entity("backend.Models.AutorCarteRelatie", b =>
+                {
+                    b.Property<Guid>("AutorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CarteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AutorId", "CarteId");
+
+                    b.HasIndex("CarteId");
+
+                    b.ToTable("AutorCarteRelaties");
+                });
+
+            modelBuilder.Entity("backend.Models.Carte", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descriere")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carte");
+                });
+
+            modelBuilder.Entity("backend.Models.Editura", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Editura");
+                });
+
             modelBuilder.Entity("backend.Models.Test", b =>
                 {
                     b.Property<Guid>("Id")
@@ -41,6 +137,51 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("backend.Models.Autor", b =>
+                {
+                    b.HasOne("backend.Models.Editura", "Editura")
+                        .WithMany("Autori")
+                        .HasForeignKey("EdituraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Editura");
+                });
+
+            modelBuilder.Entity("backend.Models.AutorCarteRelatie", b =>
+                {
+                    b.HasOne("backend.Models.Autor", "Autor")
+                        .WithMany("AutorCarteRelatie")
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.Carte", "Carte")
+                        .WithMany("AutoriCarteRelatie")
+                        .HasForeignKey("CarteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Carte");
+                });
+
+            modelBuilder.Entity("backend.Models.Autor", b =>
+                {
+                    b.Navigation("AutorCarteRelatie");
+                });
+
+            modelBuilder.Entity("backend.Models.Carte", b =>
+                {
+                    b.Navigation("AutoriCarteRelatie");
+                });
+
+            modelBuilder.Entity("backend.Models.Editura", b =>
+                {
+                    b.Navigation("Autori");
                 });
 #pragma warning restore 612, 618
         }
