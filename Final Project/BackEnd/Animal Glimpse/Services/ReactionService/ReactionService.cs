@@ -29,6 +29,40 @@ namespace Animal_Glimpse.Services.ReactionService
             _mapper = mapper;
         }
 
+        public async Task DeleteReaction(ReactionDeleteDTO reaction)
+        {
+            var existingUser = await _userRepository.GetUserById(reaction.UserId);
+            if (existingUser == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
+            var existingPost = _postRepository.FindById(reaction.PostId);
+            if (existingPost == null)
+            {
+                throw new Exception("Invalid post");
+            }
+
+            var existingReaction = await _reactionRepository.FindByKey(reaction.UserId,reaction.PostId);
+            if (existingReaction == null)
+            {
+                throw new Exception("User didn't react to that");
+            }
+
+            _reactionRepository.Delete(existingReaction);
+            await _reactionRepository.SaveAsync();
+        }
+
+        public async Task<Dictionary<string, List<string>>> GetReactionsOfPost(Guid postId)
+        {
+            var existingPost = _postRepository.FindById(postId);
+            if(existingPost == null)
+            {
+                throw new Exception("Invalid post");
+            }
+            return await _reactionRepository.GetReactionsOfPost(postId);
+        }
+
         public async Task ReactToPost(ReactionCreateDTO reaction)
         {
             var existingUser = await _userRepository.GetUserById(reaction.UserId);
@@ -50,14 +84,9 @@ namespace Animal_Glimpse.Services.ReactionService
             }
 
             var newReaction = _mapper.Map<Reaction>(reaction);
-            //newReaction.User = existingUser;
-            //newReaction.Post = existingPost;
-            //newReaction.React = existingReact;
 
             await _reactionRepository.CreateAsync(newReaction);
             await _reactionRepository.SaveAsync();
-
-            Console.WriteLine("IM HERE COX COX!!");
         }
     }
 }

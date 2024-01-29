@@ -50,7 +50,7 @@ namespace Animal_Glimpse.Data
 
             // User <-> Post <-> React: Many-to-Many-to-Many (Reaction)
             modelBuilder.Entity<Reaction>()
-                .HasKey(reaction => new { reaction.UserId, reaction.PostId, reaction.ReactId });
+                .HasKey(reaction => new { reaction.UserId, reaction.PostId});
 
             modelBuilder.Entity<Reaction>()
                 .HasOne(reaction => reaction.User)

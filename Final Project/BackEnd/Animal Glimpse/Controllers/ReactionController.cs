@@ -33,5 +33,36 @@ namespace Animal_Glimpse.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("DeleteReaction")]
+        public async Task<IActionResult> DeleteReaction([FromBody] ReactionDeleteDTO reaction)
+        {
+            try
+            {
+                await _reactionService.DeleteReaction(reaction);
+                return Ok(new ErrorResponse()
+                {
+                    StatusCode = 200,
+                    Message = "Reaction deleted successfully"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetReactionsOfPost")]
+        public async Task<IActionResult> GetReactionsOfPost(Guid postId)
+        {
+            try
+            {
+                return Ok(await _reactionService.GetReactionsOfPost(postId));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace Animal_Glimpse.Services.ReactService
             }
 
             existingReact.LastModifiedTime = DateTime.Now;
-            if (react.Name != "" && react.Name != null) existingReact.Name = react.Name;
+            if(react.Name != "" && react.Name != null) existingReact.Name = react.Name;
             if(react.Logo != "" && react.Logo != null) existingReact.Logo = react.Logo;
             if(react.Color != null && react.Color == 0) existingReact.Color = react.Color;
 
