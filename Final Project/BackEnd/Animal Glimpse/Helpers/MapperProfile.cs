@@ -3,6 +3,8 @@ using Animal_Glimpse.Models.DTOs;
 using Animal_Glimpse.Models.DTOs.CommentDTO;
 using Animal_Glimpse.Models.DTOs.PostDTO;
 using Animal_Glimpse.Models.DTOs.ProfileDTO;
+using Animal_Glimpse.Models.DTOs.ReactDTO;
+using Animal_Glimpse.Models.DTOs.ReactionDTO;
 using Animal_Glimpse.Models.DTOs.UserDTOs;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -58,6 +60,17 @@ namespace Animal_Glimpse.Helpers
             // COMMENT
             CreateMap<Comments, CommentCreateDTO>();
             CreateMap<CommentCreateDTO, Comments>();
+
+            // REACT
+            CreateMap<React, ReactGetDTO>();
+            CreateMap<ReactGetDTO, React>();
+
+            CreateMap<React, ReactCreateDTO>();
+            CreateMap<ReactCreateDTO, React>();
+
+            // REACTION
+            CreateMap<Reaction, ReactionCreateDTO>();
+            CreateMap<ReactionCreateDTO, Reaction>();
         }
     }
 }

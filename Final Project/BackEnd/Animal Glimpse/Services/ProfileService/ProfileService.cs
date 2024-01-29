@@ -73,9 +73,14 @@ namespace Animal_Glimpse.Services.ProfileService
             }
 
             profile.LastModified = DateTime.Now; 
-            if (profile.ProfilePic != null) { existingProfile.ProfilePic = profile.ProfilePic; }
-            if(profile.CoverPic != null) { existingProfile.CoverPic = profile.CoverPic; }
-            if(profile.Bio != null) { existingProfile.Bio = profile.Bio; }
+            if(profile.ProfilePic != null && profile.ProfilePic != "")
+                existingProfile.ProfilePic = profile.ProfilePic;
+            
+            if(profile.CoverPic != null && profile.CoverPic != "")
+                existingProfile.CoverPic = profile.CoverPic; 
+
+            if(profile.Bio != null && profile.Bio != "")
+                existingProfile.Bio = profile.Bio; 
 
             _profileRepository.Update(_mapper.Map<Animal_Glimpse.Models.Profile>(existingProfile));
             await _profileRepository.SaveAsync();

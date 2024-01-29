@@ -11,15 +11,15 @@ namespace Animal_Glimpse.Services.CommentsService
     public class CommentsService : ICommentsService
     {
         public ICommentsRepository _commentsRepository;
-        public IUserRepository  _userRepository;
+        public IUserRepository _userRepository;
         public IPostRepository _postRepository;
         public IMapper _mapper;
 
-        public CommentsService(ICommentsRepository commentsRepository, 
+        public CommentsService(ICommentsRepository commentsRepository,
                                IUserRepository userRepository,
                                IPostRepository postRepository,
                                IMapper mapper)
-        {   
+        {
             _commentsRepository = commentsRepository;
             _mapper = mapper;
             _userRepository = userRepository;
@@ -29,13 +29,13 @@ namespace Animal_Glimpse.Services.CommentsService
         public async Task AddComment(CommentCreateDTO comm)
         {
             var existingUser = await _userRepository.GetUserById(comm.UserId);
-            if(existingUser == null)
+            if (existingUser == null)
             {
                 throw new Exception("Invalid User");
             }
-            
+
             var existingPost = await _postRepository.FindByIdAsync(comm.PostId);
-            if(existingPost == null)
+            if (existingPost == null)
             {
                 throw new Exception("Invalid Post");
             }
@@ -47,7 +47,7 @@ namespace Animal_Glimpse.Services.CommentsService
         public async Task DeleteComment(Guid id)
         {
             var existingComment = _commentsRepository.FindById(id);
-            if( existingComment == null)
+            if (existingComment == null)
             {
                 throw new Exception("Invalid Post");
             }
@@ -59,7 +59,7 @@ namespace Animal_Glimpse.Services.CommentsService
         public async Task<List<CommentGetUsersDTO>> GetCommsOfPost(Guid postId)
         {
             var existingPost = _postRepository.FindById(postId);
-            if(existingPost == null)
+            if (existingPost == null)
             {
                 throw new Exception("Invalid Post");
             }
@@ -86,16 +86,19 @@ namespace Animal_Glimpse.Services.CommentsService
         {
             var existingComment = _commentsRepository.FindById(comm.CommentId);
 
-            if(existingComment == null)
+            if (existingComment == null)
             {
                 throw new Exception("Invalid Comment");
             }
 
-            existingComment.LastModifiedTime = DateTime.Now;
-            existingComment.Content = comm.Content;
+            if (comm.Content != null && comm.Content != "")
+            {
+                existingComment.LastModifiedTime = DateTime.Now;
+                existingComment.Content = comm.Content;
 
-            _commentsRepository.Update(existingComment);
-            await _commentsRepository.SaveAsync();
+                _commentsRepository.Update(existingComment);
+                await _commentsRepository.SaveAsync();
+            }
         }
     }
 }

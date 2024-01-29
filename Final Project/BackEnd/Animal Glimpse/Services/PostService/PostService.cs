@@ -50,7 +50,7 @@ namespace Animal_Glimpse.Services.PostService
             return _mapper.Map<List<PostCreateDTO>>(posts);
         }
 
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             var post = _postRepository.FindById(id);
             if(post == null)
@@ -58,10 +58,10 @@ namespace Animal_Glimpse.Services.PostService
                 throw new Exception("Post doesnt exist");
             }
             _postRepository.Delete(post);
-            _postRepository.Save();
+            await _postRepository.SaveAsync();
         }
 
-        public void UpdatePost(PostUpdateDTO post)
+        public async Task UpdatePost(PostUpdateDTO post)
         {
             var existingPost =  _postRepository.FindById(post.Id); 
             if(existingPost == null)
@@ -70,10 +70,11 @@ namespace Animal_Glimpse.Services.PostService
             }
 
             existingPost.LastModifiedTime = DateTime.Now;
-            if(post.Description != null) existingPost.Description = post.Description;
+            if(post.Description != null && post.Description != "") 
+                 existingPost.Description = post.Description;
             
             _postRepository.Update(_mapper.Map<Post>(existingPost));
-            _postRepository.Save();
+            await _postRepository.SaveAsync();
         }
 
         public async Task<List<PostShownDTO>> GetFeed()

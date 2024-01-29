@@ -51,10 +51,16 @@ namespace Animal_Glimpse.Services.CommentsService
                 throw new Exception("User not found");
 
             }
-            if(user.UserName != null) existingUser.UserName = user.UserName;
-            if(user.Email != null) existingUser.Email = user.Email;
-            if(user.PhoneNumber != null) existingUser.PhoneNumber = user.PhoneNumber;
-            if (user.Password != null)
+            if(user.UserName != null && user.UserName != "") 
+                existingUser.UserName = user.UserName;
+            
+            if(user.Email != null && user.Email != "") 
+                existingUser.Email = user.Email;
+            
+            if(user.PhoneNumber != null && user.PhoneNumber != "") 
+                existingUser.PhoneNumber = user.PhoneNumber;
+            
+            if (user.Password != null && user.Password != "")
             {
                 var hasher = new PasswordHasher<User>();
                 existingUser.PasswordHash = hasher.HashPassword(null, user.Password);

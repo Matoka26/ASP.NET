@@ -9,7 +9,7 @@ namespace Animal_Glimpse.Services.PostService
         Task<List<PostShownDTO>> GetFeed();
         Task<List<PostCreateDTO>> GetPostsByUsername(string username);
         Task CreatePost(PostCreateDTO post);
-        void UpdatePost(PostUpdateDTO post);
-        void Delete(Guid id);
+        Task UpdatePost(PostUpdateDTO post);
+        Task Delete(Guid id);
     }
 }
