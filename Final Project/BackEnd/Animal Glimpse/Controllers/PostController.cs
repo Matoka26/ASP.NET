@@ -47,7 +47,7 @@ namespace Animal_Glimpse.Controllers
         {
             try
             {
-                _postService.CreatePost(post);
+                await _postService.CreatePost(post);
                 return Ok();
             }
             catch (Exception ex)

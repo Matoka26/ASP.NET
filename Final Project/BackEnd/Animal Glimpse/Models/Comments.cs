@@ -10,7 +10,7 @@ namespace Animal_Glimpse.Models
          * It must be possible for a user to comment on a post
          * multiple times so there is used an artificial primary
          * key CommentId */
-        public string content {  get; set; }
+        public string Content {  get; set; }
 
         // Relation
         // User <-> Post

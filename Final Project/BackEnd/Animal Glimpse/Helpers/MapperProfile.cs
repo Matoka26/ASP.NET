@@ -1,5 +1,6 @@
 ﻿using Animal_Glimpse.Models;
 using Animal_Glimpse.Models.DTOs;
+using Animal_Glimpse.Models.DTOs.CommentDTO;
 using Animal_Glimpse.Models.DTOs.PostDTO;
 using Animal_Glimpse.Models.DTOs.ProfileDTO;
 using Animal_Glimpse.Models.DTOs.UserDTOs;
@@ -53,6 +54,10 @@ namespace Animal_Glimpse.Helpers
 
             CreateMap<PostShownDTO, Post>();
             CreateMap<Post, PostShownDTO>();
+
+            // COMMENT
+            CreateMap<Comments, CommentCreateDTO>();
+            CreateMap<CommentCreateDTO, Comments>();
         }
     }
 }

@@ -54,6 +54,7 @@ namespace Animal_Glimpse.Controllers
                 return BadRequest(new ErrorResponse()
                 {
                     StatusCode = 500,
+
                     Message = ex.Message
                 });
             }
