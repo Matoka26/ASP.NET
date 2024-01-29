@@ -50,12 +50,14 @@ namespace Animal_Glimpse.Services.ReactionService
             }
 
             var newReaction = _mapper.Map<Reaction>(reaction);
-            newReaction.User = existingUser;
-            newReaction.Post = existingPost;
-            newReaction.React = existingReact;
+            //newReaction.User = existingUser;
+            //newReaction.Post = existingPost;
+            //newReaction.React = existingReact;
 
             await _reactionRepository.CreateAsync(newReaction);
             await _reactionRepository.SaveAsync();
+
+            Console.WriteLine("IM HERE COX COX!!");
         }
     }
 }

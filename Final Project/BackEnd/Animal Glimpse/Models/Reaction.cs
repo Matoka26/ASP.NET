@@ -1,7 +1,7 @@
 ﻿using Animal_Glimpse.Models.Base;
 namespace Animal_Glimpse.Models
 {
-    public class Reaction: BaseEntity
+    public class Reaction
     {
         //Relation
         //User <-> Post <-> React
