@@ -79,34 +79,34 @@ namespace Animal_Glimpse.Services.CommentsService
 
         public async Task<Guid> Login(LoginDTO login)
         {
-            var userUsername = await _userManager.FindByNameAsync(login.UserName);
+           // var userUsername = await _userManager.FindByNameAsync(login.UserName);
             var userEmail = await _userManager.FindByEmailAsync(login.Email);
 
-            if(userUsername != null)
+            /*            if(userUsername != null)
+                        {
+                            var result = await _signInManager.CheckPasswordSignInAsync(userUsername, login.Password, lockoutOnFailure: false);
+
+                            if (result.Succeeded)
+                            {
+                                await _signInManager.SignInAsync(userUsername, isPersistent: true);
+
+                                return userUsername.Id;
+                            }
+                        }
+                        else
+                        {*/
+            if (userEmail != null)
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(userUsername, login.Password, lockoutOnFailure: false);
+                var result = await _signInManager.CheckPasswordSignInAsync(userEmail, login.Password, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(userUsername, isPersistent: true);
+                    await _signInManager.SignInAsync(userEmail, isPersistent: true);
 
-                    return userUsername.Id;
+                    return userEmail.Id;
                 }
             }
-            else
-            {
-                if(userEmail != null)
-                {
-                    var result = await _signInManager.CheckPasswordSignInAsync(userEmail, login.Password, lockoutOnFailure: false);
-
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(userEmail, isPersistent: true);
-
-                        return userEmail.Id;
-                    }
-                }
-            }
+        //}
             throw new Exception("User not found");
         }
 

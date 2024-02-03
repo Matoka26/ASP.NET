@@ -2,6 +2,8 @@ using Animal_Glimpse.Data;
 using Animal_Glimpse.Helpers.Extensions;
 using Animal_Glimpse.Helpers.Seeders;
 using Animal_Glimpse.Models;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,10 +31,19 @@ void SeedData(IHost app)
     }
 }
 
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -55,9 +66,16 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.SignIn.RequireConfirmedPhoneNumber = false;
 });
 
+FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "proiect-269dd-firebase-adminsdk-2w6on-3c9766015e.json")),
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 builder.Services.AddServices();
 builder.Services.AddRepositories();
@@ -65,6 +83,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSeeders();
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
 
 SeedData(app);
 
