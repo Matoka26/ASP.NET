@@ -15,6 +15,7 @@ using Animal_Glimpse.Services.CommentsService;
 using Animal_Glimpse.Helpers.Seeders;
 using Animal_Glimpse.Controllers;
 using Animal_Glimpse.Repositories.UserRepository;
+using Animal_Glimpse.Services.MessageService;
 
 namespace Animal_Glimpse.Helpers.Extensions
 {
@@ -26,13 +27,8 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<IReactRepository, ReactRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-
-            //This one might need CRUD
             services.AddTransient<IReactionRepository, ReactionRepository>();
-
-            //Associatives that idk what will happen for sure
-            services.AddTransient<ICommentsRepository, CommentsRepository>();
-            
+            services.AddTransient<ICommentsRepository, CommentsRepository>();            
 
             return services;
         }
@@ -43,13 +39,9 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<IReactService, ReactService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IUserService, UserService>();
-
-            //This one might need CRUD
             services.AddTransient<IReactionService, ReactionService>();
-
-            //Associatives that idk what will happen for sure
             services.AddTransient<ICommentsService, CommentsService>();
-
+            services.AddTransient<IMessageService, MessageService>();
             return services;
         }
 
@@ -65,5 +57,3 @@ namespace Animal_Glimpse.Helpers.Extensions
         }
     }
 }
-// IF YOU DONT NEED CRUD ON THEM JUST DELETE THOSE AT THE END,
-// MADE FOR ALL JUST IN CASE 

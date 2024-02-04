@@ -10,9 +10,6 @@ namespace Animal_Glimpse.Models.DTOs
         [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "BirthDate is required")]
-        public DateTime BirthDate { get; set; }
-
         public string PhoneNumber {  get; set; }
 
         [Required(ErrorMessage = "Username is required")]

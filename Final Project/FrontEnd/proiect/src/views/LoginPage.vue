@@ -18,6 +18,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import {login as authServiceLogin} from "@/Helpers/Axios";
+import router from "@/router";
 
 export default defineComponent({
   name: 'LoginPage',
@@ -28,8 +29,11 @@ export default defineComponent({
     const login = async () => {
       await authServiceLogin(email.value, password.value);
       console.log(email.value, password.value);
+      var token = localStorage.getItem('MyToken');
+      if(token){
+        await router.push('/MainPage');
+      }
     };
-
     return { email, password, login };
   },
 });

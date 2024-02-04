@@ -69,7 +69,7 @@ namespace Animal_Glimpse.Services.ProfileService
 
             if (existingProfile == null)
             {
-                throw new Exception("User not found");
+                throw new Exception("Profile not found");
             }
 
             profile.LastModified = DateTime.Now; 

@@ -65,6 +65,7 @@ namespace Animal_Glimpse.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [Authorize]
         [HttpGet("GetCommentsOfUser")]
         public async Task<IActionResult> GetCommsOfUser(Guid userId)
