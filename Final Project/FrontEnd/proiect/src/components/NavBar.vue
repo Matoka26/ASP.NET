@@ -8,7 +8,7 @@
       <nav class="nav-bar">
         <div class="searchBar">
           <input v-model="searchQuery" placeholder="Search..." />
-          <button @click="search" class="searchButton">Search</button>
+          <button @click="emitSearch" class="searchButton">Search</button>
         </div>
         <router-link to="/ProfilePage" class="nav-link">
           <button class="normalButton">My Profile</button>
@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import { defineProps } from 'vue';
-
 
 
 export default {
@@ -43,10 +41,11 @@ export default {
   },
   methods: {
     removeToken() {
-      localStorage.removeItem('myToken');
+      localStorage.removeItem('MyToken');
     },
-    search() {
+    emitSearch() {
       console.log('Searching for:', this.searchQuery);
+      this.$emit('search', this.searchQuery);
     },
   },
 };
