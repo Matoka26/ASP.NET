@@ -1,32 +1,42 @@
 <template>
   <div class="profile-page">
     <NavBar :name=username />
+    <div class="userInfo">
+      <p>{{ username }}</p>
+      <p>{{ profilePic }}</p>
+      <p>{{ coverPic }}</p>
+      <p>{{ bio }}</p>
+    </div>
 
-    <p>{{ username }}</p>
-    <p>{{ profilePic }}</p>
-    <p>{{ coverPic }}</p>
-    <p>{{ bio }}</p>
+    <div class="posts">
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <Post :username="username" :description="item.description" :picture="item.picture" />
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
 <script type="module">
 import { defineComponent, ref, onMounted } from 'vue';
-import { foundUser, foundProfile } from "@/Helpers/Axios";
+import { foundUser, foundProfile, getPostsOfUser} from "@/Helpers/Axios";
 import NavBar from "@/components/NavBar.vue";
+import Post from "@/components/Post.vue";
 
 export default defineComponent({
   name: 'ProfilePage',
-  components: {NavBar},
+  components: {Post, NavBar},
   setup(){
     const username = ref('');
     const profilePic = ref('');
     const coverPic = ref('');
     const bio = ref('');
+    const items = ref([]);
 
-    if(localStorage.getItem(('SearchToken')) == null)
-      var token = localStorage.getItem('MyToken');
-    else
-      var token = localStorage.getItem('SearchToken');
+    let token = localStorage.getItem('MyToken');
+
 
     onMounted(async () =>{
       try{
@@ -38,12 +48,13 @@ export default defineComponent({
         coverPic.value = profile.coverPic;
         bio.value = profile.bio;
 
+        items.value = await getPostsOfUser(user.username);
         console.log('Mounted',username.value);
       }catch (error){
         console.error("Error fetching:", error);
       }
     });
-    return {username, profilePic, coverPic, bio};
+    return {username, profilePic, coverPic, bio, items};
   }
 });
 
@@ -51,8 +62,11 @@ export default defineComponent({
 
 
 
-
-
 <style scoped>
-
+.userInfo{
+  background-color: #282828;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 10px 20px;
+}
 </style>

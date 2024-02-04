@@ -55,3 +55,21 @@ export const foundProfile = async (username:string) =>{
         console.log(error);
     }
 }
+
+export const getPostsOfUser = async (username:string) =>{
+    try{
+        const response = await axios.get(`https://localhost:7271/GetPostsByUsername?username=${username}`);
+        return response.data;
+    }catch (error){
+        console.log(error);
+    }
+}
+
+export const getFeed = async () =>{
+    try{
+        const response = await axios.get(`https://localhost:7271/PostFeed`);
+        return response.data;
+    }catch (error){
+        console.log(error);
+    }
+}

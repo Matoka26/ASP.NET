@@ -7,6 +7,6 @@ namespace Animal_Glimpse.Repositories.PostRepository
     public interface IPostRepository: IGenericRepository<Post>
     {
         Task<List<Post>> GetAllPostsAsync(Guid userId);
-        Task<List<Post>> GetFeed();
+        Task<List<PostShownDTO>> GetFeed();
     }
 }

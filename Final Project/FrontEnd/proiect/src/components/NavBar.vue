@@ -32,7 +32,7 @@
 import { defineProps } from 'vue';
 
 
-const props = defineProps(['name']);
+
 export default {
   name: 'NavBar',
   props: ["name"],
