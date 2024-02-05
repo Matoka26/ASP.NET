@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import router from "@/router";
 import {signUp as authServiceSignUp} from "@/Helpers/Axios";
 
 export default defineComponent({
@@ -52,6 +53,7 @@ export default defineComponent({
                               phoneNumber.value, userName.value,
                               email.value, password.value);
       console.log(userName.value);
+      router.push('/Login');
     };
 
     return { firstName, lastName, phoneNumber, userName, email, password, signUp };

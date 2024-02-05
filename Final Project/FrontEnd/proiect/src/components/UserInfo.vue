@@ -1,27 +1,23 @@
-
 <template>
-  <div class="postare">
-    <p>{{ username }}</p>
-    <p>{{ picture }}</p>
-    <p>{{ description }}</p>
+  <div class="info">
+    <p><h1>{{ username }}</h1></p>
+    <p>{{ profilePic }}</p>
+    <p>{{ coverPic }}</p>
+    <p>{{ bio }}</p>
   </div>
 
 </template>
 
-
-
 <script>
-import {onMounted, ref} from "vue";
 
 export default{
   name: 'Post',
-  props: ['username','picture','description'],
+  props: ['username','profilePic','coverPic','bio'],
 }
-
 </script>
 
 <style scoped>
-.postare{
+.info{
   background-color: #282828;
   margin: 10px;
   border: 1px solid black;

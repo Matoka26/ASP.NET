@@ -33,20 +33,19 @@ export default defineComponent({
     const bio = ref('');
     const items = ref([]);
 
-    let token = localStorage.getItem('MyToken');
+    let token = localStorage.getItem('SearchedToken');
 
 
     onMounted(async () =>{
       try{
-        const user = await foundUser(token);
-        const profile = await foundProfile(user.username);
+        const profile = await foundProfile(token);
 
-        username.value = user.username;
+        username.value = token
         profilePic.value = profile.profilePic;
         coverPic.value = profile.coverPic;
         bio.value = profile.bio;
 
-        items.value = await getPostsOfUser(user.username);
+        items.value = await getPostsOfUser(token);
         console.log('Mounted',username.value);
       }catch (error){
         console.error("Error fetching:", error);
@@ -58,7 +57,7 @@ export default defineComponent({
     handleSearch(searchQuery) {
       console.log("Searched:", searchQuery)
       localStorage.setItem('SearchedToken', searchQuery);
-      //location.reload();
+      location.reload();
       this.$router.push('/OtherProfile');
     }
   }

@@ -55,12 +55,17 @@ export default {
 <style scoped>
 
 .main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #41b883;
   color: #fff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000;
 }
 
 .logoutButton{
@@ -94,6 +99,7 @@ export default {
 .nav-bar {
   display: flex;
   margin-left: auto;
+
 }
 
 .normalButton:hover{
