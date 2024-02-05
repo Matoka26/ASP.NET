@@ -18,7 +18,7 @@
           <button class="normalButton">Home</button>
         </router-link>
 
-        <router-link to="/HomePage" class="nav-link">
+        <router-link to="/" class="nav-link">
           <button class="logoutButton" @click="removeToken">Logout</button>
         </router-link>
 

@@ -16,6 +16,7 @@ using Animal_Glimpse.Helpers.Seeders;
 using Animal_Glimpse.Controllers;
 using Animal_Glimpse.Repositories.UserRepository;
 using Animal_Glimpse.Services.MessageService;
+using Animal_Glimpse.Services.EmailService;
 
 namespace Animal_Glimpse.Helpers.Extensions
 {
@@ -41,7 +42,10 @@ namespace Animal_Glimpse.Helpers.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReactionService, ReactionService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            //Firebase notifs
             services.AddTransient<IMessageService, MessageService>();
+            //Emails
+            services.AddScoped<IEmailService, EmailService>();
             return services;
         }
 

@@ -2,6 +2,7 @@ using Animal_Glimpse.Data;
 using Animal_Glimpse.Helpers.Extensions;
 using Animal_Glimpse.Helpers.Seeders;
 using Animal_Glimpse.Models;
+using Animal_Glimpse.Models.EmailConfig;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Identity;
@@ -45,6 +46,14 @@ builder.Services.AddCors(options =>
     });
 });
 // Add services to the container.
+
+// Add Email Configs
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailConfigurations>();
+
+builder.Services.AddSingleton(emailConfig);
+
 
 builder.Services.AddControllers();
 

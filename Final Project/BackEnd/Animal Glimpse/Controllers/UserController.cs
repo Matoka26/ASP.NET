@@ -10,6 +10,10 @@ using Animal_Glimpse.Models.Responses;
 using System;
 using Microsoft.AspNetCore.Identity;
 using Animal_Glimpse.Models.DTOs.UserDTOs;
+using Animal_Glimpse.Services.EmailService;
+using Animal_Glimpse.Models.EmailConfig;
+using FirebaseAdmin.Messaging;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Animal_Glimpse.Controllers
 {
@@ -19,11 +23,13 @@ namespace Animal_Glimpse.Controllers
     {
         private readonly IUserService _userService;   
         private readonly UserManager<User> _userManager;
+        private readonly IEmailService _emailService;
 
-        public UserController(IUserService userService, UserManager<User> userManager)
+        public UserController(IUserService userService, UserManager<User> userManager, IEmailService emailService)
         {
             _userService = userService;
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         [HttpGet("GetUserById")]
@@ -66,6 +72,13 @@ namespace Animal_Glimpse.Controllers
         {
             try
             {
+                var subject = "Test";
+                var content = "SignUp successfull";
+                var message = new Models.EmailConfig.Message(new string[]{signUpDTO.Email}, subject, content);
+                
+
+                _emailService.SendEmail(message);
+
                 await _userService.SignUp(signUpDTO);
                 return Ok(new ErrorResponse()
                 {

@@ -16,7 +16,6 @@ export default{
   methods: {
     /// THIS IS A PIPE
     snippet(value){
-      console.log("im here");
        if(value.length > 100)
          return value.slice(0,100) + '...';
       return value;
