@@ -80,6 +80,7 @@ export default {
   margin-left: 10px;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .normalButton{
@@ -94,6 +95,7 @@ export default {
   margin-left: 10px;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .nav-bar {

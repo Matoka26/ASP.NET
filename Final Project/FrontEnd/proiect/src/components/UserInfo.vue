@@ -3,7 +3,7 @@
     <p><h1>{{ username }}</h1></p>
     <p>{{ profilePic }}</p>
     <p>{{ coverPic }}</p>
-    <p>{{ bio }}</p>
+    <p>{{ snippet(bio) }}</p>
   </div>
 
 </template>
@@ -13,7 +13,16 @@
 export default{
   name: 'Post',
   props: ['username','profilePic','coverPic','bio'],
-}
+  methods: {
+    /// THIS IS A PIPE
+    snippet(value){
+      console.log("im here");
+       if(value.length > 100)
+         return value.slice(0,100) + '...';
+      return value;
+    },
+  },
+};
 </script>
 
 <style scoped>
