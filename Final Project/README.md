@@ -8,11 +8,13 @@ A social media for animal pictures
 ### Extra  
 - [X] Autentificare cu Identity (1 pct)  
 - [X] SMTP with Mailkit (1 pct)
-- [X] Notificari cu firebase (1 pct)  
+- [X] Notificari cu firebase (1 pct)
+- [X] Unit of Work (1 pct)
 ## Frontend
 - [X] Cel putin 3 servicii conectate la serverul din .Net . Afisarea de date din servicii in componente.
 - [X] Cel putin 1 directiva. (pe langa cea facuta la laborator)
 - [X] Cel putin 1 pipe
 - [X] Register + Login
 
-    Echivalentu pentru Pipe din Angular este Filter in Vue.js care a fost [scos din versiunea 3](https://v3-migration.vuejs.org/breaking-changes/filters.html), asa ca am folosit o metoda si am apelat-o asemanator
+    Echivalentu pentru Pipe din Angular este Filter in Vue.js care a fost [scos din versiunea 3](https://v3-migration.vuejs.org/breaking-changes/filters.html), asa ca am folosit o metoda si am apelat-o asemanator  
+    Echivalentul pentru Directiva din Angular este Emit in Vue.js
